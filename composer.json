@@ -9,7 +9,6 @@
             "email": "marcom@upanup.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.4",
         "ext-json": "*",
