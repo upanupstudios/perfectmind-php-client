@@ -28,7 +28,7 @@ final class Config
    */
   public function getClientNumber(): string
   {
-      return $this->apiKey;
+      return $this->clientNumber;
   }
 
   /**
