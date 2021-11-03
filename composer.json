@@ -2,7 +2,7 @@
     "name": "upanupstudios/perfectmind-php-client",
     "description": "Perfectmind API client for PHP",
     "type": "library",
-    "license": "MIT License",
+    "license": "MIT",
     "authors": [
         {
             "name": "Marco Maranao",
