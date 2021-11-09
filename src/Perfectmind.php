@@ -56,6 +56,11 @@ class Perfectmind
 
     $content = $response->getBody()->__toString();
 
+    if(is_string($content)) {
+      $content = ['status' => $content];
+      $content = json_encode($content);
+    }
+
     try {
       $content = json_decode($content, true, 512, JSON_BIGINT_AS_STRING | JSON_THROW_ON_ERROR);
     } catch (\JsonException $e) {
@@ -75,6 +80,19 @@ class Perfectmind
     $request = $request->withHeader('Content-Type', 'application/json');
     $request = $request->withHeader('X-Access-Key', $this->getConfig()->getApiKey());
     $request = $request->withHeader('X-Client-Number', $this->getConfig()->getClientNumber());
+
+    return $this->sendRequest($request);
+  }
+
+  public function query(string $query)
+  {
+    $body = json_encode(array('QueryString' => $query));
+
+    $request = $this->getRequestFactory()->createRequest('POST', $this->getConfig()->getApiUrl().'/api/'.$this->version.'/B2C/Query');
+    $request = $request->withHeader('Content-Type', 'application/json');
+    $request = $request->withHeader('X-Client-Number', $this->getConfig()->getClientNumber());
+    $request = $request->withHeader('X-Access-Key', $this->getConfig()->getApiKey());
+    $request = $request->withBody($this->getStreamFactory()->createStream($body));
 
     return $this->sendRequest($request);
   }
